@@ -4,28 +4,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Animal animal = new Animal();
-        animal.species = "dog";
-        animal.name = "Lassie";
-        animal.weight = 20.0;
-        System.out.println("ANIMAL - Species, Name, Weight: "
-                + animal.species + ", " + animal.name + ", " + animal.weight);
+        Animal cat = new Animal("cat");
+        cat.name = "Grumpy";
+        System.out.println("ANIMAL - Species, Name: " + cat.species + ", " + cat.name);
 
-        Human human = new Human();
-        human.firstName = "Jack";
-        human.lastName = "Trades";
-        human.sex = "male";
-        human.age = 20;
-        System.out.println("HUMAN - First Name, Last Name, Sex, Age: "
-                + human.firstName + ", " + human.lastName + ", " + human.sex + ", " + human.age);
+        for (int i=1; i <= 6; i++)
+            cat.feed();
 
-        Phone phone = new Phone();
-        phone.manufacturer = "Apple";
-        phone.model = "iPhone";
-        phone.operatingSystem = "iOS";
-        phone.screenSize = 5.5;
-        System.out.println("PHONE - Manufacturer, Model, OS, Screen size: "
-                + phone.manufacturer + ", " + phone.model + ", " + phone.operatingSystem + ", " + phone.screenSize);
+        for (int i=1; i <= 12; i++)
+            cat.takeForAWalk();
 
+        cat.feed();
     }
 }
