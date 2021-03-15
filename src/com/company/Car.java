@@ -7,7 +7,7 @@ public class Car {
     final String type;
     public String color;
     public Integer maxSpeed;
-    public Integer price;
+    public Double price;
 
 
     Car(String manufacturer, String model, String type){
