@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.devices.Car;
+import com.company.devices.Phone;
+
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
@@ -34,7 +37,7 @@ public class Main {
         automobile.maxSpeed = 240;
         automobile.price = 40000.0;
 
-        System.out.println("CAR: " + automobile.manufacturer + ", " + automobile.model + ", " + automobile.type);
+        System.out.println("CAR: " + automobile.toString());
 
 
         // Task 3 & 4 test
@@ -67,5 +70,23 @@ public class Main {
         person.setCar(car);
         person.setSalary(65000.0);
         person.setCar(car);
+
+
+        // Task 6 test
+
+        Car car1 = new Car("VW", "Passat", "sedan");
+        Car car2 = new Car("VW", "Passat", "sedan");
+
+        System.out.println("\nCar1 equals Car2: " + car1.equals(car2));
+        System.out.println("Car1: " + car1);
+        System.out.println("Car2: " + car2);
+
+        System.out.println();
+        System.out.println(cat.toString());
+        System.out.println(automobile.toString());
+        System.out.println(human.toString());
+
+        Phone phone = new Phone("Apple", "iPhone", "iOS");
+        System.out.println(phone.toString());
     }
 }

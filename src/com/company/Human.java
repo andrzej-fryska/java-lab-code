@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.devices.Car;
+
 import java.util.Date;
 
 public class Human {
@@ -13,6 +15,11 @@ public class Human {
     private Double salary = 0.0;
     private Date previousGetSalaryDate;
     private Double previousGetSalarySalary = 0.0;
+
+
+    public String toString(){
+        return firstName + " " + lastName + " " + sex + " " + age;
+    }
 
 
     Double getSalary(){
@@ -45,12 +52,12 @@ public class Human {
     void setCar(Car car){
         if (this.salary > car.price){
             this.car = car;
-            System.out.println("\n" + this.firstName + " spent some cash to purchase a car: " + car.manufacturer);
+            System.out.println("\n" + this.firstName + " spent some cash to purchase a car.");
         } else if (this.salary > car.price / 12){
             this.car = car;
-            System.out.println("\n" + this.firstName + " had to take a loan to purchase a car: " + car.manufacturer);
+            System.out.println("\n" + this.firstName + " had to take a loan to purchase a car.");
         } else {
-            System.out.println("\n" + this.firstName + " couldn't afford to purchase a car: " + car.manufacturer + ". Not enough money.");
+            System.out.println("\n" + this.firstName + " couldn't afford to purchase a car. Not enough money.");
         }
 
     }

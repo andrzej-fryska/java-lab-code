@@ -33,6 +33,11 @@ public class Animal {
     }
 
 
+    public String toString(){
+        return species + " " + name + " " + weight;
+    }
+
+
     void feed(){
         if (this.currentWeight > 0) {
             this.currentWeight += 1;
