@@ -34,8 +34,7 @@ public class Main {
         automobile.maxSpeed = 240;
         automobile.price = 40000.0;
 
-        human.car = automobile;
-        System.out.println(human.firstName + " owns " + human.car.manufacturer);
+        System.out.println("CAR: " + automobile.manufacturer + ", " + automobile.model + ", " + automobile.type);
 
 
         // Task 3 & 4 test
@@ -52,5 +51,21 @@ public class Main {
         System.out.println("Current salary: " + human.getSalary());
 
         human.setSalary(-2000.0);
+
+
+        // Task 5 test
+
+        Car car = new Car("Audi", "Quattro", "sedan");
+        car.price = 60000.0;
+
+        Human person = new Human();
+        person.firstName = "Jack";
+        person.setSalary(2000.0);
+
+        person.setCar(car);
+        person.setSalary(10000.0);
+        person.setCar(car);
+        person.setSalary(65000.0);
+        person.setCar(car);
     }
 }

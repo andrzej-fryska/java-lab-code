@@ -9,7 +9,7 @@ public class Human {
     String sex;
     Integer age;
     Animal pet;
-    Car car;
+    private Car car;
     private Double salary = 0.0;
     private Date previousGetSalaryDate;
     private Double previousGetSalarySalary = 0.0;
@@ -34,5 +34,24 @@ public class Human {
             System.out.println("An annex to the contract can be obtained from Ms. Hanna in HR Department.");
         } else
             System.out.println("\n[SET_SALARY] Salary not set. Lower than 0 value detected.");
+    }
+
+
+    Car getCar(){
+        return this.car;
+    }
+
+
+    void setCar(Car car){
+        if (this.salary > car.price){
+            this.car = car;
+            System.out.println("\n" + this.firstName + " spent some cash to purchase a car: " + car.manufacturer);
+        } else if (this.salary > car.price / 12){
+            this.car = car;
+            System.out.println("\n" + this.firstName + " had to take a loan to purchase a car: " + car.manufacturer);
+        } else {
+            System.out.println("\n" + this.firstName + " couldn't afford to purchase a car: " + car.manufacturer + ". Not enough money.");
+        }
+
     }
 }

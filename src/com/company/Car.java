@@ -14,5 +14,6 @@ public class Car {
         this.manufacturer = manufacturer;
         this.model = model;
         this.type = type;
+        this.price = 0.0;
     }
 }
