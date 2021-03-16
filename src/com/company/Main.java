@@ -32,7 +32,7 @@ public class Main {
         System.out.println("HUMAN - First Name, Last Name, Sex, Age: "
                 + human.firstName + ", " + human.lastName + ", " + human.sex + ", " + human.age);
 
-        Car automobile = new Car("BMW", "3 series", "coupe");
+        Car automobile = new Car("BMW", "3 series", "coupe", 2020);
         automobile.color = "red";
         automobile.maxSpeed = 240;
         automobile.price = 40000.0;
@@ -58,7 +58,7 @@ public class Main {
 
         // Task 5 test
 
-        Car car = new Car("Audi", "Quattro", "sedan");
+        Car car = new Car("Audi", "Quattro", "sedan", 2019);
         car.price = 60000.0;
 
         Human person = new Human();
@@ -74,8 +74,8 @@ public class Main {
 
         // Task 6 test
 
-        Car car1 = new Car("VW", "Passat", "sedan");
-        Car car2 = new Car("VW", "Passat", "sedan");
+        Car car1 = new Car("VW", "Passat", "sedan", 2018);
+        Car car2 = new Car("VW", "Passat", "sedan", 2018);
 
         System.out.println("\nCar1 equals Car2: " + car1.equals(car2));
         System.out.println("Car1: " + car1);
@@ -86,7 +86,16 @@ public class Main {
         System.out.println(automobile.toString());
         System.out.println(human.toString());
 
-        Phone phone = new Phone("Apple", "iPhone", "iOS");
+        Phone phone = new Phone("Apple", "iPhone", "iOS", 2020);
         System.out.println(phone.toString());
+
+
+        // Task 7 test
+
+        System.out.println();
+        System.out.println(car1.toString());
+        car1.turnOn();
+        System.out.println(phone.toString());
+        phone.turnOn();
     }
 }
