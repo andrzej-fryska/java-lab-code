@@ -2,8 +2,10 @@ package com.company;
 
 import com.company.creatures.FarmAnimal;
 import com.company.creatures.Pet;
-import com.company.devices.Car;
-import com.company.devices.Phone;
+import com.company.devices.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -170,6 +172,33 @@ public class Main {
         familiar.feed();
         familiar.feed(5.0);
 
+
+        // Task 10 test
+
+        title("10");
+
+        Phone smartphone = new Phone("Apple","Model X", "iOS", 2020);
+        smartphone.installAnApp("Signal");
+        smartphone.installAnApp("Telegram", "1.0");
+        smartphone.installAnApp("Whats Up", "1.0", "server3.domain.x");
+
+        List<String> appList = new ArrayList<>();
+        appList.add("Signal");
+        appList.add("Telegram");
+        appList.add("Whats Up");
+        smartphone.installAnApp(appList);
+
+        Url url = new Url("Signal", "2.0", "server5.domain.x");
+        smartphone.installAnApp(url);
+
+        System.out.println();
+
+        Diesel card = new Diesel("VW", "Passat", "sedan", 2010);
+        Electric care = new Electric("Toyota", "Prius", "sedan", 2015);
+        Lpg carl = new Lpg("Audi", "80", "sedan", 2005);
+        card.refuel();
+        care.refuel();
+        carl.refuel();
     }
 
 

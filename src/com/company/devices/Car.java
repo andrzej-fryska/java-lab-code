@@ -66,4 +66,6 @@ public class Car extends Device implements sellable{
                 + buyer.firstName + " bought " + this.toString() + " from " + seller.firstName + " for " + price);
     }
 
+
+    protected void refuel(){}
 }
