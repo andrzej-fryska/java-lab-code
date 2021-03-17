@@ -1,11 +1,14 @@
-package com.company;
+package com.company.creatures;
+
+import com.company.Human;
+import com.company.sellable;
 
 import java.io.File;
 
-public class Animal implements sellable{
+abstract class Animal implements sellable, feedable {
 
-    final String species;
-    String name;
+    public final String species;
+    public String name;
     private Double weight;
     private Double currentWeight;
     static public final Double DEFAULT_ANIMAL_WEIGHT = 1.0;
@@ -38,7 +41,7 @@ public class Animal implements sellable{
     }
 
 
-    void feed(){
+    public void feed(){
         if (this.currentWeight > 0) {
             this.currentWeight += 1;
             if(this.currentWeight > this.weight * 2)
@@ -52,7 +55,7 @@ public class Animal implements sellable{
     }
 
 
-    void takeForAWalk() {
+    public void takeForAWalk() {
         if (this.currentWeight > 0) {
             this.currentWeight -= 1;
             if(this.currentWeight < this.weight / 2)
@@ -65,10 +68,10 @@ public class Animal implements sellable{
         }
     }
 
-
+    @Override
     public void sell(Human seller, Human buyer, Double price){
 
-        if (seller.pet == null){
+        if (seller.getPet() == null){
             System.out.println("Transaction denied. Seller has no any pets.");
             return;
         }
@@ -80,8 +83,8 @@ public class Animal implements sellable{
 
         buyer.cash -= price;
         seller.cash += price;
-        buyer.pet = seller.pet;
-        seller.pet = null;
+        buyer.setPet(seller.getPet());
+        seller.removePet();
         System.out.println("Transaction successful. "
                 + buyer.firstName + " bought " + this.species + " from " + seller.firstName + " for " + price);
     }

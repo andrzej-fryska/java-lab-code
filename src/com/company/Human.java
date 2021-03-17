@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.creatures.Pet;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 
@@ -11,7 +12,7 @@ public class Human {
     String lastName;
     String sex;
     Integer age;
-    Animal pet;
+    private Pet pet;
     private Car car;
     private Phone phone;
     private Double salary = 0.0;
@@ -80,17 +81,20 @@ public class Human {
     }
 
 
-    public Phone getPhone() {
-        return phone;
-    }
-
-
+    public Phone getPhone() { return phone; }
     public void setPhone(Phone phone){
         this.phone = phone;
     }
-
-
     public void removePhone(){
         this.phone = null;
+    }
+
+
+    public Pet getPet() { return pet; }
+    public void setPet(Pet pet){
+        this.pet = pet;
+    }
+    public void removePet(){
+        this.pet = null;
     }
 }

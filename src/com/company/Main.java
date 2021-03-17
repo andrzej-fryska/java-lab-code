@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.creatures.FarmAnimal;
+import com.company.creatures.Pet;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 
@@ -11,7 +13,7 @@ public class Main {
 
         title("1");
 
-        Animal cat = new Animal("cat");
+        Pet cat = new Pet("cat");
         cat.name = "Grumpy";
         System.out.println("ANIMAL - Species, Name: " + cat.species + ", " + cat.name);
 
@@ -114,7 +116,7 @@ public class Main {
 
         title("8");
 
-        Animal tiger = new Animal("tiger");
+        Pet tiger = new Pet("tiger");
         tiger.name = "Mr. King";
 
         Human seller = new Human();
@@ -126,12 +128,12 @@ public class Main {
         buyer.cash = 0.0;
 
         tiger.sell(seller, buyer, 1000.0);
-        seller.pet = tiger;
+        seller.setPet(tiger);
         tiger.sell(seller, buyer, 1000.0);
         buyer.cash = 1500.0;
-        System.out.println("Seller's pet: " + seller.pet + " | Buyer's pet: " + buyer.pet);
+        System.out.println("Seller's pet: " + seller.getPet() + " | Buyer's pet: " + buyer.getPet());
         tiger.sell(seller, buyer, 1000.0);
-        System.out.println("Seller's pet: " + seller.pet + " | Buyer's pet: " + buyer.pet);
+        System.out.println("Seller's pet: " + seller.getPet() + " | Buyer's pet: " + buyer.getPet());
 
         System.out.println();
 
@@ -150,6 +152,23 @@ public class Main {
         iphone.sell(seller, buyer, 50.0);
         buyer.cash = 100.0;
         iphone.sell(seller, buyer, 50.0);
+
+
+        // Task 9 test
+
+        title("9");
+
+        FarmAnimal cow = new FarmAnimal("cow");
+        System.out.println(cow.toString());
+        cow.beEaten();
+        cow.feed();
+        cow.feed(10.0);
+
+        Pet familiar = new Pet("cat");
+        familiar.name = "Garfield";
+        System.out.println(familiar.toString());
+        familiar.feed();
+        familiar.feed(5.0);
 
     }
 
