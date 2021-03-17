@@ -2,7 +2,7 @@ package com.company;
 
 import java.io.File;
 
-public class Animal {
+public class Animal implements sellable{
 
     final String species;
     String name;
@@ -65,4 +65,24 @@ public class Animal {
         }
     }
 
+
+    public void sell(Human seller, Human buyer, Double price){
+
+        if (seller.pet == null){
+            System.out.println("Transaction denied. Seller has no any pets.");
+            return;
+        }
+
+        if (buyer.cash < price){
+            System.out.println("Transaction denied. Buyer has not enough money.");
+            return;
+        }
+
+        buyer.cash -= price;
+        seller.cash += price;
+        buyer.pet = seller.pet;
+        seller.pet = null;
+        System.out.println("Transaction successful. "
+                + buyer.firstName + " bought " + this.species + " from " + seller.firstName + " for " + price);
+    }
 }

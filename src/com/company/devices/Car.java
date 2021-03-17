@@ -1,6 +1,9 @@
 package com.company.devices;
 
-public class Car extends Device {
+import com.company.Human;
+import com.company.sellable;
+
+public class Car extends Device implements sellable{
 
     final String type;
     public String color;
@@ -41,4 +44,26 @@ public class Car extends Device {
     public void turnOn(){
         System.out.println("Car has been turned on.");
     }
+
+
+    public void sell(Human seller, Human buyer, Double price){
+
+        if (seller.getCar() == null){
+            System.out.println("Transaction denied. Seller has no any cars.");
+            return;
+        }
+
+        if (buyer.cash < price){
+            System.out.println("Transaction denied. Buyer has not enough money.");
+            return;
+        }
+
+        buyer.cash -= price;
+        seller.cash += price;
+        buyer.assignCar(seller.getCar());
+        seller.removeCar();
+        System.out.println("Transaction successful. "
+                + buyer.firstName + " bought " + this.toString() + " from " + seller.firstName + " for " + price);
+    }
+
 }

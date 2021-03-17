@@ -9,6 +9,8 @@ public class Main {
 
         // Task 1 test
 
+        title("1");
+
         Animal cat = new Animal("cat");
         cat.name = "Grumpy";
         System.out.println("ANIMAL - Species, Name: " + cat.species + ", " + cat.name);
@@ -23,6 +25,8 @@ public class Main {
 
 
         // Task 2 test
+
+        title("2");
 
         Human human = new Human();
         human.firstName = "Jack";
@@ -42,6 +46,8 @@ public class Main {
 
         // Task 3 & 4 test
 
+        title("3 & 4");
+
         System.out.println("Current salary: " + human.getSalary());
         human.setSalary(1000.0);
 
@@ -57,6 +63,8 @@ public class Main {
 
 
         // Task 5 test
+
+        title("5");
 
         Car car = new Car("Audi", "Quattro", "sedan", 2019);
         car.price = 60000.0;
@@ -74,10 +82,12 @@ public class Main {
 
         // Task 6 test
 
+        title("6");
+
         Car car1 = new Car("VW", "Passat", "sedan", 2018);
         Car car2 = new Car("VW", "Passat", "sedan", 2018);
 
-        System.out.println("\nCar1 equals Car2: " + car1.equals(car2));
+        System.out.println("Car1 equals Car2: " + car1.equals(car2));
         System.out.println("Car1: " + car1);
         System.out.println("Car2: " + car2);
 
@@ -92,10 +102,59 @@ public class Main {
 
         // Task 7 test
 
-        System.out.println();
+        title("7");
+
         System.out.println(car1.toString());
         car1.turnOn();
         System.out.println(phone.toString());
         phone.turnOn();
+
+
+        // Task 8 test
+
+        title("8");
+
+        Animal tiger = new Animal("tiger");
+        tiger.name = "Mr. King";
+
+        Human seller = new Human();
+        seller.firstName = "Jack The Seller";
+        seller.cash = 0.0;
+
+        Human buyer = new Human();
+        buyer.firstName = "Joe The Buyer";
+        buyer.cash = 0.0;
+
+        tiger.sell(seller, buyer, 1000.0);
+        seller.pet = tiger;
+        tiger.sell(seller, buyer, 1000.0);
+        buyer.cash = 1500.0;
+        System.out.println("Seller's pet: " + seller.pet + " | Buyer's pet: " + buyer.pet);
+        tiger.sell(seller, buyer, 1000.0);
+        System.out.println("Seller's pet: " + seller.pet + " | Buyer's pet: " + buyer.pet);
+
+        System.out.println();
+
+        System.out.println("Seller's money: " + seller.cash + " | Buyer's money: " + buyer.cash);
+        Car skoda = new Car("Skoda", "110 R", "coupe", 1979);
+        skoda.sell(seller, buyer, 500.0);
+        seller.assignCar(skoda);
+        skoda.sell(seller, buyer, 500.0);
+        System.out.println("Seller's money: " + seller.cash + " | Buyer's money: " + buyer.cash);
+
+        System.out.println();
+
+        Phone iphone = new Phone("Apple", "iPhone 4S", "iOS", 2010);
+        iphone.sell(seller, buyer, 50.0);
+        seller.setPhone(iphone);
+        iphone.sell(seller, buyer, 50.0);
+        buyer.cash = 100.0;
+        iphone.sell(seller, buyer, 50.0);
+
+    }
+
+
+    private static void title(String num){
+        System.out.println("\n----- TASK " + num + " TEST\n");
     }
 }

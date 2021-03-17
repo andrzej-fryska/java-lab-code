@@ -1,20 +1,23 @@
 package com.company;
 
 import com.company.devices.Car;
+import com.company.devices.Phone;
 
 import java.util.Date;
 
 public class Human {
 
-    String firstName;
+    public String firstName;
     String lastName;
     String sex;
     Integer age;
     Animal pet;
     private Car car;
+    private Phone phone;
     private Double salary = 0.0;
     private Date previousGetSalaryDate;
     private Double previousGetSalarySalary = 0.0;
+    public Double cash = 0.0;
 
 
     public String toString(){
@@ -44,21 +47,50 @@ public class Human {
     }
 
 
-    Car getCar(){
+    public Car getCar(){
         return this.car;
     }
 
 
-    void setCar(Car car){
+    public void setCar(Car car){
+
         if (this.salary > car.price){
             this.car = car;
             System.out.println("\n" + this.firstName + " spent some cash to purchase a car.");
-        } else if (this.salary > car.price / 12){
-            this.car = car;
-            System.out.println("\n" + this.firstName + " had to take a loan to purchase a car.");
-        } else {
-            System.out.println("\n" + this.firstName + " couldn't afford to purchase a car. Not enough money.");
+            return;
         }
 
+        if (this.salary > car.price / 12){
+            this.car = car;
+            System.out.println("\n" + this.firstName + " had to take a loan to purchase a car.");
+            return;
+        }
+
+        System.out.println("\n" + this.firstName + " couldn't afford to purchase a car. Not enough money.");
+    }
+
+
+    public void assignCar(Car car){
+        this.car = car;
+    }
+
+
+    public void removeCar(){
+        this.car = null;
+    }
+
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+
+    public void setPhone(Phone phone){
+        this.phone = phone;
+    }
+
+
+    public void removePhone(){
+        this.phone = null;
     }
 }
