@@ -4,25 +4,42 @@ import com.company.creatures.Pet;
 import com.company.devices.Car;
 import com.company.devices.Phone;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Human {
 
     public String firstName;
-    String lastName;
-    String sex;
-    Integer age;
+    public String lastName;
+    public String sex;
+    public Integer age;
     private Pet pet;
-    private Car car;
+    public Car[] garage;
     private Phone phone;
     private Double salary = 0.0;
     private Date previousGetSalaryDate;
     private Double previousGetSalarySalary = 0.0;
     public Double cash = 0.0;
+    static public final Integer DEFAULT_GARAGE_SIZE = 2;
+
+
+    public Human(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.garage = new Car[DEFAULT_GARAGE_SIZE];
+    }
+
+
+    public Human(String firstName, String lastName, Integer garageSize){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.garage = new Car[garageSize];
+    }
 
 
     public String toString(){
-        return firstName + " " + lastName + " " + sex + " " + age;
+        return firstName + " " + lastName;
     }
 
 
@@ -48,37 +65,52 @@ public class Human {
     }
 
 
-    public Car getCar(){
-        return this.car;
+    public Car getCar(Integer placeNumber){
+
+        if (placeNumber > 0 && placeNumber <= garage.length)
+            return garage[placeNumber-1];
+
+        System.out.println("Not a valid place number in this garage.");
+        return null;
     }
 
 
-    public void setCar(Car car){
+    public void setCar(Car car, Integer placeNumber){
 
-        if (this.salary > car.price){
-            this.car = car;
-            System.out.println("\n" + this.firstName + " spent some cash to purchase a car.");
+        if (placeNumber < 1 || placeNumber > garage.length){
+            System.out.println("Not a valid place number in this garage.");
             return;
         }
 
-        if (this.salary > car.price / 12){
-            this.car = car;
-            System.out.println("\n" + this.firstName + " had to take a loan to purchase a car.");
+        if (salary >= car.price){
+            garage[placeNumber-1] = car;
+            System.out.println(firstName + " " + lastName + " spent some cash to purchase a car.");
             return;
         }
 
-        System.out.println("\n" + this.firstName + " couldn't afford to purchase a car. Not enough money.");
+        if (salary >= car.price / 12){
+            garage[placeNumber-1] = car;
+            System.out.println(firstName + " " + lastName + " had to take a loan to purchase a car.");
+            return;
+        }
+
+        System.out.println(firstName + " " + lastName + " couldn't afford to purchase a car. Not enough money.");
     }
 
 
-    public void assignCar(Car car){
-        this.car = car;
+    public Double getCarsValueInGarage(){
+        Double value = 0.0;
+        for(Car car: garage)
+            value += car.getValue();
+        return value;
     }
 
 
-    public void removeCar(){
-        this.car = null;
+    public void sortCarsInGarageByYear(){
+        Arrays.sort(garage, Comparator.comparing(Car::getYear));
     }
+
+
 
 
     public Phone getPhone() { return phone; }

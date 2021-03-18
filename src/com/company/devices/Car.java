@@ -3,9 +3,11 @@ package com.company.devices;
 import com.company.Human;
 import com.company.sellable;
 
+import java.util.Objects;
+
 public class Car extends Device implements sellable{
 
-    final String type;
+    private String type;
     public String color;
     public Integer maxSpeed;
     public Double price;
@@ -17,6 +19,8 @@ public class Car extends Device implements sellable{
         this.type = type;
         this.color = "";
         this.yearOfProduction = yearOfProduction;
+        this.price = 0.0;
+        this.value = 0.0;
     }
 
 
@@ -46,24 +50,56 @@ public class Car extends Device implements sellable{
     }
 
 
-    public void sell(Human seller, Human buyer, Double price){
+    public void setValue(Double value){this.value = value;}
+    public Double getValue(){return value;}
 
-        if (seller.getCar() == null){
-            System.out.println("Transaction denied. Seller has no any cars.");
-            return;
+    public Integer getYear() {return yearOfProduction;}
+
+    public void sell(Human seller, Human buyer, Double price) throws Exception {
+
+
+        // check if seller has a car in a garage (if not then throw an exception)
+        int sellerGaragePlaceNumber = -1;
+        int index = 0;
+
+        for(Car car: seller.garage)
+            if (Objects.equals(car, this))
+                sellerGaragePlaceNumber = index++;
+
+        if (sellerGaragePlaceNumber < 0 ){
+            throw new Exception("No such car in seller's garage.");
         }
 
+        // check if buyer has a free place in a garage (if not then throw an exception)
+        int buyerGaragePlaceNumber = -1;
+        index = 0;
+        for(Car car: buyer.garage){
+            if (Objects.equals(car, null)){
+                buyerGaragePlaceNumber = index;
+                break;
+            }
+            index++;
+        }
+
+        if (buyerGaragePlaceNumber < 0 ){
+            throw new Exception("No free place to put a car in buyer's garage.");
+        }
+
+        // check if buyer has enough money (if not then throws an exception)
         if (buyer.cash < price){
-            System.out.println("Transaction denied. Buyer has not enough money.");
-            return;
+            throw new Exception("Buyer has not enough money.");
         }
 
-        buyer.cash -= price;
-        seller.cash += price;
-        buyer.assignCar(seller.getCar());
-        seller.removeCar();
-        System.out.println("Transaction successful. "
-                + buyer.firstName + " bought " + this.toString() + " from " + seller.firstName + " for " + price);
+        // transaction successful
+        if (sellerGaragePlaceNumber >= 0 && buyerGaragePlaceNumber >= 0 && buyer.cash >= price){
+            buyer.cash -= price;
+            seller.cash += price;
+            seller.garage[sellerGaragePlaceNumber] = null;
+            buyer.garage[buyerGaragePlaceNumber] = this;
+            System.out.println("[TRANSACTION SUCCESSFUL] "
+                    + seller.firstName + " sold " + this.manufacturer + " to " + buyer.firstName + " for " + price);
+        }
+
     }
 
 

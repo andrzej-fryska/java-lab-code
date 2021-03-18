@@ -5,6 +5,7 @@ import com.company.creatures.Pet;
 import com.company.devices.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -32,13 +33,10 @@ public class Main {
 
         title("2");
 
-        Human human = new Human();
-        human.firstName = "Jack";
-        human.lastName = "Trades";
+        Human human = new Human("Jack", "Trades");
         human.sex = "male";
         human.age = 20;
-        System.out.println("HUMAN - First Name, Last Name, Sex, Age: "
-                + human.firstName + ", " + human.lastName + ", " + human.sex + ", " + human.age);
+        System.out.println(human.toString());
 
         Car automobile = new Car("BMW", "3 series", "coupe", 2020);
         automobile.color = "red";
@@ -73,15 +71,14 @@ public class Main {
         Car car = new Car("Audi", "Quattro", "sedan", 2019);
         car.price = 60000.0;
 
-        Human person = new Human();
-        person.firstName = "Jack";
+        Human person = new Human("Jack", "Many");
         person.setSalary(2000.0);
 
-        person.setCar(car);
+        person.setCar(car, 1);
         person.setSalary(10000.0);
-        person.setCar(car);
+        person.setCar(car, 1);
         person.setSalary(65000.0);
-        person.setCar(car);
+        person.setCar(car,1);
 
 
         // Task 6 test
@@ -121,12 +118,10 @@ public class Main {
         Pet tiger = new Pet("tiger");
         tiger.name = "Mr. King";
 
-        Human seller = new Human();
-        seller.firstName = "Jack The Seller";
+        Human seller = new Human("Jack", "The Seller");
         seller.cash = 0.0;
 
-        Human buyer = new Human();
-        buyer.firstName = "Joe The Buyer";
+        Human buyer = new Human("Joe", "The Buyer");
         buyer.cash = 0.0;
 
         tiger.sell(seller, buyer, 1000.0);
@@ -136,15 +131,6 @@ public class Main {
         System.out.println("Seller's pet: " + seller.getPet() + " | Buyer's pet: " + buyer.getPet());
         tiger.sell(seller, buyer, 1000.0);
         System.out.println("Seller's pet: " + seller.getPet() + " | Buyer's pet: " + buyer.getPet());
-
-        System.out.println();
-
-        System.out.println("Seller's money: " + seller.cash + " | Buyer's money: " + buyer.cash);
-        Car skoda = new Car("Skoda", "110 R", "coupe", 1979);
-        skoda.sell(seller, buyer, 500.0);
-        seller.assignCar(skoda);
-        skoda.sell(seller, buyer, 500.0);
-        System.out.println("Seller's money: " + seller.cash + " | Buyer's money: " + buyer.cash);
 
         System.out.println();
 
@@ -199,6 +185,50 @@ public class Main {
         card.refuel();
         care.refuel();
         carl.refuel();
+
+
+        // Task 11 test
+
+        title("11");
+
+        System.out.println("Seller's money: " + seller.cash + " | Buyer's money: " + buyer.cash);
+        Car skoda = new Car("Skoda", "110 R", "coupe", 1979);
+
+        // no such car in seller's garage exception
+        try { skoda.sell(seller, buyer, 500.0); } catch (Exception e) { e.printStackTrace(); }
+        seller.setCar(skoda, 1);
+
+        // no place to put a car in buyer's garage exception
+        buyer.setCar(skoda, 1);
+        buyer.setCar(skoda, 2);
+        try { skoda.sell(seller, buyer, 500.0); } catch (Exception e) { e.printStackTrace(); }
+
+        // buyer has not enough money exception
+        buyer.garage[0] = buyer.garage[1] = null;
+        try { skoda.sell(seller, buyer, 500.0); } catch (Exception e) { e.printStackTrace(); }
+
+        // everything is fine with a transaction
+        buyer.cash = 1000.0;
+        try { skoda.sell(seller, buyer, 500.0); } catch (Exception e) { e.printStackTrace(); }
+
+        // get total value of cars in a garage
+        Human smith = new Human("George", "Smith");
+        Car audi = new Car("Audi", "Quattro", "sedan", 2019);
+        Car vw = new Car("VW", "Passat", "sedan", 2010);
+        audi.setValue(1500.0);
+        vw.setValue(500.0);
+        smith.setCar(audi, 1);
+        smith.setCar(vw, 2);
+        System.out.println("Total value of cars in " + smith.firstName + "'s garage: " + smith.getCarsValueInGarage());
+
+        // sort cars in garage by year of production ascending
+        System.out.println("[garage before sorting]");
+        for (Car c: smith.garage)
+            System.out.println(c.toString());
+        smith.sortCarsInGarageByYear();
+        System.out.println("[garage after sorting]");
+        for (Car c: smith.garage)
+            System.out.println(c.toString());
     }
 
 
