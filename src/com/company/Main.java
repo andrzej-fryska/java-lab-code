@@ -5,7 +5,6 @@ import com.company.creatures.Pet;
 import com.company.devices.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -207,7 +206,7 @@ public class Main {
         buyer.garage[0] = buyer.garage[1] = null;
         try { skoda.sell(seller, buyer, 500.0); } catch (Exception e) { e.printStackTrace(); }
 
-        // everything is fine with a transaction
+        // the seller is not a cars owner exception
         buyer.cash = 1000.0;
         try { skoda.sell(seller, buyer, 500.0); } catch (Exception e) { e.printStackTrace(); }
 
@@ -229,6 +228,29 @@ public class Main {
         System.out.println("[garage after sorting]");
         for (Car c: smith.garage)
             System.out.println(c.toString());
+
+
+        // Task 12 test
+
+        title("12");
+
+        Human joe = new Human("Joe", "Seller");
+        Human jack = new Human("Jack", "Buyer");
+        Car toyota = new Car("Toyota", "Prius", "sedan", 2015);
+
+        joe.setCar(toyota, 1);
+        toyota.listTransactions();
+
+        System.out.println("Jack was toyota's owner: " + toyota.wasOwner(jack));
+        System.out.println("Is Joe sold toyota to Jack? : " + toyota.isASoldB(joe, jack));
+        jack.cash = 500.0;
+
+        try { toyota.sell(joe, jack, 100.0); } catch (Exception e) { e.printStackTrace(); }
+        toyota.listTransactions();
+        System.out.println("Jack was toyota's owner: " + toyota.wasOwner(jack));
+        System.out.println("Is Joe sold toyota to Jack? : " + toyota.isASoldB(joe, jack));
+
+        System.out.println("Total number of transactions related to toyota: " + toyota.getTransactionsNumber());
     }
 
 

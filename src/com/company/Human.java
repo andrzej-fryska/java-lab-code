@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.creatures.Pet;
 import com.company.devices.Car;
+import com.company.devices.CarTransaction;
 import com.company.devices.Phone;
 
 import java.util.Arrays;
@@ -84,12 +85,14 @@ public class Human {
 
         if (salary >= car.price){
             garage[placeNumber-1] = car;
+            car.transactions.add(new CarTransaction(null, this, null));
             System.out.println(firstName + " " + lastName + " spent some cash to purchase a car.");
             return;
         }
 
         if (salary >= car.price / 12){
             garage[placeNumber-1] = car;
+            car.transactions.add(new CarTransaction(null, this, null));
             System.out.println(firstName + " " + lastName + " had to take a loan to purchase a car.");
             return;
         }
