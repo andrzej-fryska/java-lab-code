@@ -251,6 +251,47 @@ public class Main {
         System.out.println("Is Joe sold toyota to Jack? : " + toyota.isASoldB(joe, jack));
 
         System.out.println("Total number of transactions related to toyota: " + toyota.getTransactionsNumber());
+
+
+        // Task 13 test
+
+        title("13");
+
+        Application signal = new Application("Signal", "1.1", 0.0);
+        Application telegram = new Application("Telegram", "3.5", 0.0);
+        Application skype = new Application("Skype", "11", 0.0);
+        Application skypeCommercial = new Application("Skype For Business", "11", 100.0);
+        Application whatsup = new Application("WhatsUp", "4.2", 0.0);
+        Application whatsupCommercial = new Application("WhatsUp For Groups", "4.2", 50.0);
+        Application photoshop = new Application("Photoshop", "CS6", 1000.0);
+
+        Human collector = new Human("Jack", "The Collector");
+        Phone newPhone = new Phone("Apple", "newPhone", "iOS", 2021);
+
+        newPhone.installApplication(signal, collector);
+        newPhone.installApplication(telegram, collector);
+        newPhone.installApplication(whatsup, collector);
+        newPhone.installApplication(skype, collector);
+
+        newPhone.installApplication(photoshop, collector);
+        collector.cash = 200.0;
+        System.out.println("Buyers cash: " + collector.cash);
+        newPhone.installApplication(whatsupCommercial, collector);
+        newPhone.installApplication(skypeCommercial, collector);
+        System.out.println("Buyers cash: " + collector.cash);
+
+        newPhone.isAppInstalled(signal);
+        newPhone.isAppInstalled("Signal");
+        newPhone.isAppInstalled("Photoshop");
+        System.out.println();
+        newPhone.listFreeApps();
+        System.out.println();
+        System.out.println("Total price of apps on phone: " + newPhone.getAppsTotalPrice());
+
+        System.out.println();
+        newPhone.listAppsSortedByNameAsc();
+        System.out.println();
+        newPhone.listAppsSortedByPriceAsc();
     }
 
 
